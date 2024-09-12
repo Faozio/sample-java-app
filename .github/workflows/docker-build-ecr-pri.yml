@@ -1,0 +1,23 @@
+name: ECR Private Build
+on: push
+jobs:
+    Build-To-PrivateECR:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Code Checkout
+              uses: actions/checkout@v4.1.7
+      
+            - name: ECR Login
+              uses: docker/login-action@v3.3.0
+              with: 
+                  registry: 021891608340.dkr.ecr.eu-west-2.amazonaws.com
+                  Username: ${{ secrets.ACCESS_USERNAME }}
+                  Password: ${{ secrets.ACCESS_PASSWORD }}
+              env:
+                    aws-region: ${{  secrets.REGION  }}
+            - name: Build Image
+              run: |
+                  printenv
+                  docker build -t javanta:latest .
+                  docker tag javanta:latest 021891608340.dkr.ecr.eu-west-2.amazonaws.com/faozio:${GITHUB_RUN_NUMBER}
+                  docker push 021891608340.dkr.ecr.eu-west-2.amazonaws.com/faozio:${GITHUB_RUN_NUMBER}
