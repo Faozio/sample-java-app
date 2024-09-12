@@ -12,3 +12,8 @@ jobs:
               with: 
                   Username: ${{ secrets.DOCKERHUB_USERNAME }}
                   Password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            - name: Build Image
+              run: |
+                  docker build -t javanta:latest .
+                  docker tag javanta:latest faozio/ichigo:v1
+                  docker push faozio/ichigo:v1
