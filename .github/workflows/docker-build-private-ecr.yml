@@ -1,5 +1,5 @@
 name: ECR Private Build
-on: push
+on: workflow_dispatch
 jobs:
     Build-To-PrivateECR:
         runs-on: ubuntu-latest
