@@ -1,5 +1,5 @@
-name: ECR Build
-on: push
+name: ECR Public Build
+on: workflow_dispatch
 jobs:
     Build-To-PublicECR:
         runs-on: ubuntu-latest
