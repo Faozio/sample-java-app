@@ -14,6 +14,7 @@ jobs:
                   Password: ${{ secrets.DOCKERHUB_PASSWORD }}
             - name: Build Image
               run: |
+                  printenv
                   docker build -t javanta:latest .
-                  docker tag javanta:latest faozio/ichigo:v1
-                  docker push faozio/ichigo:v1
+                  docker tag javanta:latest faozio/ichigo:${GITHUB_RUN_NUMBER}
+                  docker push faozio/ichigo:${GITHUB_RUN_NUMBER}
